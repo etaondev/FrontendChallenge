@@ -12,7 +12,7 @@
           matInput
           placeholder="Title"
           formControlName="title"
-          (titleChange)="onTitleChange()"
+          (input)="onTitleChange()"
           required
         />
       </mat-form-field>
@@ -23,7 +23,7 @@
           matInput
           [matDatepicker]="picker"
           formControlName="date"
-          (dateChange)="onDateChange()"
+          (dateInput)="onDateChange()"
           required
         />
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>

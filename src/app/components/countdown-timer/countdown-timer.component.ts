@@ -1,4 +1,11 @@
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core'
+import {
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core'
 import { interval, Subscription } from 'rxjs'
 import { map } from 'rxjs/operators'
 
@@ -19,7 +26,17 @@ export class CountdownTimerComponent implements OnInit, OnDestroy {
     this.startCountdown()
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['targetDate'] || changes['title']) {
+      this.startCountdown()
+    }
+  }
+
   startCountdown(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+    
     this.subscription = interval(1000)
       .pipe(map(() => this.calculateCountdown()))
       .subscribe(time => {
