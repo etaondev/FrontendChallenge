@@ -1,0 +1,24 @@
+.container {
+  padding: 0 16px;
+}
+.form-container {
+  max-width: 582px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+.mat-mdc-form-field {
+  min-width: 280px;
+}
+.mat-mdc-form-field:nth-child(1) {
+  margin-right: 10px;
+}
+
+@media (max-width: 600px) {
+  container {
+    padding: 0 8px;
+  }
+  .mat-mdc-form-field {
+    width: 100%;
+  }
+}

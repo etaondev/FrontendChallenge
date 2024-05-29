@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { interval, Subscription } from 'rxjs'
 import { map } from 'rxjs/operators'
 
@@ -13,6 +13,8 @@ export class CountdownTimerComponent implements OnInit, OnDestroy {
   countdown: string
   private subscription: Subscription
 
+  constructor(private cdr: ChangeDetectorRef) {}
+
   ngOnInit(): void {
     this.startCountdown()
   }
@@ -20,7 +22,10 @@ export class CountdownTimerComponent implements OnInit, OnDestroy {
   startCountdown(): void {
     this.subscription = interval(1000)
       .pipe(map(() => this.calculateCountdown()))
-      .subscribe(time => (this.countdown = time))
+      .subscribe(time => {
+        this.countdown = time
+        this.cdr.detectChanges()
+      })
   }
 
   calculateCountdown(): string {
@@ -36,7 +41,7 @@ export class CountdownTimerComponent implements OnInit, OnDestroy {
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
     const seconds = Math.floor((distance % (1000 * 60)) / 1000)
 
-    return `${days}d ${hours}h ${minutes}m ${seconds}s`
+    return `${days}days, ${hours}h, ${minutes}m, ${seconds}s`
   }
 
   ngOnDestroy(): void {

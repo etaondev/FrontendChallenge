@@ -39,27 +39,24 @@ export class CountdownFormComponent implements OnInit {
   onDateChange(): void {
     if (this.countdownForm.valid) {
       const date = this.countdownForm.get('date')?.value
-      const title = this.countdownForm.get('title')?.value
       this.dateService.setDate(date)
-      this.dateService.setTitle(title)
       this.countdownDate = date
       this.cdr.detectChanges()
     }
   }
-
-  public startCountdown() {
+  onTitleChange(): void {
     if (this.countdownForm.valid) {
       const title = this.countdownForm.get('title')?.value
       this.dateService.setTitle(title)
       this.countdownTitle = title
-      this.onDateChange() // Ensure the date is also updated
+      this.cdr.detectChanges()
     }
   }
 
-  /*setMidsummerDate(): void {
-    const midsummerEve = new Date()
-    midsummerEve.setMonth(5) // June (0-based index)
-    midsummerEve.setDate(22) // 22th of June (typical date for Midsummer Eve)
-    localStorage.setItem(this.STORAGE_KEY, midsummerEve.toISOString())
-  }*/
+  startCountdown() {
+    if (this.countdownForm.valid) {
+      this.onTitleChange()
+      this.onDateChange() // Ensure both the title and date are updated
+    }
+  }
 }
