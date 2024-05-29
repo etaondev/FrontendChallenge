@@ -1,4 +1,5 @@
 h2 {
+  font-size: 44px;
   color: #72035d;
   span {
     color: black;
@@ -6,7 +7,15 @@ h2 {
   }
 }
 
-h2,
-h3 {
-  font-size: 67px;
+.responsive-text {
+  width: 100%;
+  white-space: nowrap; /* Prevent line breaks */
+  overflow: hidden; /* Hide overflow if text is too long */
+  text-align: center;
+}
+
+@media (min-width: 600px) {
+  .responsive-text {
+    font-size: 54px; /* Adjust for larger screens */
+  }
 }
