@@ -1,1 +1,4 @@
-<p>countdown-timer works!</p>
+<div *ngIf="title && targetDate">
+  <h2>Time to {{ title }}:</h2>
+  <h3>{{ countdown }}</h3>
+</div>
