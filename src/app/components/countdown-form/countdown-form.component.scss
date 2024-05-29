@@ -7,6 +7,7 @@
   display: flex;
   justify-content: center;
 }
+
 .mat-mdc-form-field {
   min-width: 280px;
 }
@@ -15,9 +16,11 @@
 }
 
 @media (max-width: 600px) {
-  container {
-    padding: 0 8px;
+
+  .form-container {
+    padding: 100px 48px 0 48px;
   }
+
   .mat-mdc-form-field {
     width: 100%;
   }
