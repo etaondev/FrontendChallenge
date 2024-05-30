@@ -46,21 +46,20 @@ export class CountdownFormComponent implements OnInit, OnDestroy {
     if (this.countdownForm.valid) {
       const date = this.countdownForm.get('date')?.value
       this.dateService.setDate(date)
-      // this.countdownDate = date
-      //this.cdr.detectChanges()
+      this.countdownDate = date
+      this.cdr.detectChanges()
     }
   }
   onTitleChange(): void {
     if (this.countdownForm.valid) {
       const title = this.countdownForm.get('title')?.value
       this.dateService.setTitle(title)
-      //  this.countdownTitle = title
-      //this.cdr.detectChanges()
+       this.countdownTitle = title
+      this.cdr.detectChanges()
     }
   }
 
   startCountdown() {
-    // if (this.countdownForm.valid) {
     this.onTitleChange()
     this.onDateChange() // Ensure both the title and date are updated
   }

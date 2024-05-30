@@ -36,7 +36,7 @@ export class CountdownTimerComponent implements OnInit, OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-    
+
     this.subscription = interval(1000)
       .pipe(map(() => this.calculateCountdown()))
       .subscribe(time => {
