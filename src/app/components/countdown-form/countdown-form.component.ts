@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { DateService } from '../../services/date.service'
-import { ChangeDetectorRef } from '@angular/core'
-import { Subscription } from 'rxjs'
+import { BehaviorSubject, Subscription } from 'rxjs'
 @Component({
   selector: 'app-countdown-form',
   templateUrl: './countdown-form.component.html',
@@ -10,15 +9,14 @@ import { Subscription } from 'rxjs'
 })
 export class CountdownFormComponent implements OnInit, OnDestroy {
   countdownForm: FormGroup
-  countdownDate: Date | null = null
-  countdownTitle: string | null = null
+  countdownDate: BehaviorSubject<Date | null> = new BehaviorSubject<Date | null>(null)
+  countdownTitle: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null)
 
   private subscriptions: Subscription[] = []
 
   constructor(
     private fb: FormBuilder,
-    private dateService: DateService,
-    private cdr: ChangeDetectorRef,
+    private dateService: DateService
   ) {
     this.countdownForm = this.fb.group({
       title: ['', Validators.required],
@@ -29,14 +27,14 @@ export class CountdownFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscriptions.push(
       this.dateService.date$.subscribe(date => {
-        this.countdownDate = date
+        this.countdownDate.next(date)
         this.countdownForm.get('date')?.setValue(date)
       }),
     )
 
     this.subscriptions.push(
       this.dateService.title$.subscribe(title => {
-        this.countdownTitle = title
+        this.countdownTitle.next(title);
         this.countdownForm.get('title')?.setValue(title)
       }),
     )
@@ -46,16 +44,14 @@ export class CountdownFormComponent implements OnInit, OnDestroy {
     if (this.countdownForm.valid) {
       const date = this.countdownForm.get('date')?.value
       this.dateService.setDate(date)
-      this.countdownDate = date
-      this.cdr.detectChanges()
+      this.countdownDate.next(date);
     }
   }
   onTitleChange(): void {
     if (this.countdownForm.valid) {
       const title = this.countdownForm.get('title')?.value
       this.dateService.setTitle(title)
-       this.countdownTitle = title
-      this.cdr.detectChanges()
+      this.countdownTitle.next(title);
     }
   }
 

@@ -1,8 +1,8 @@
 <div class="container">
   <app-countdown-timer
-    *ngIf="countdownDate"
-    [targetDate]="countdownDate"
-    [title]="countdownTitle"
+    *ngIf="countdownDate | async"
+    [targetDate]="countdownDate | async"
+    [title]="countdownTitle | async"
   ></app-countdown-timer>
   <div class="form-container">
     <form [formGroup]="countdownForm">

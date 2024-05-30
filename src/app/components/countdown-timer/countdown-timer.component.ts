@@ -1,12 +1,11 @@
 import {
-  ChangeDetectorRef,
   Component,
   Input,
   OnDestroy,
   OnInit,
   SimpleChanges,
 } from '@angular/core'
-import { interval, Subscription } from 'rxjs'
+import { BehaviorSubject, interval, Subscription } from 'rxjs'
 import { map } from 'rxjs/operators'
 
 @Component({
@@ -17,17 +16,20 @@ import { map } from 'rxjs/operators'
 export class CountdownTimerComponent implements OnInit, OnDestroy {
   @Input() title!: string
   @Input() targetDate!: Date
-  countdown: string
-  private subscription: Subscription
+  countdown$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  title$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private subscription: Subscription;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor() {}
 
   ngOnInit(): void {
+    this.title$.next(this.title);
     this.startCountdown()
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['targetDate'] || changes['title']) {
+      this.title$.next(this.title);
       this.startCountdown()
     }
   }
@@ -40,8 +42,7 @@ export class CountdownTimerComponent implements OnInit, OnDestroy {
     this.subscription = interval(1000)
       .pipe(map(() => this.calculateCountdown()))
       .subscribe(time => {
-        this.countdown = time
-        this.cdr.detectChanges()
+        this.countdown$.next(time);
       })
   }
 
