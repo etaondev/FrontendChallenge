@@ -12,21 +12,18 @@ import {
 @Directive({
   selector: '[appFitText]',
 })
-export class FitTextDirective implements AfterViewInit {
+export class FitTextDirective implements AfterViewInit, OnChanges {
   private element: HTMLElement
+  resizeService: any
 
   constructor(private el: ElementRef) {
     this.element = el.nativeElement
   }
 
-  ngOnInit(): void {
-    this.adjustFontSize()
-  }
-
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.adjustFontSize()
-    })
+    }, 0)
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -50,5 +47,6 @@ export class FitTextDirective implements AfterViewInit {
       fontSize -= 1
       element.style.fontSize = `${fontSize}px`
     }
+    this.resizeService.setWidth(this.element.scrollWidth)
   }
 }

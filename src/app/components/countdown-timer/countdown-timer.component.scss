@@ -1,23 +1,19 @@
 .countdown-timer-container {
   width: 100%;
   border: 1px solid black;
-
-  div {
-    width: 100vw;
-  }
 }
 
 h2 {
   color: #72035d;
+
 }
 h3 {
   color: black;
   font-weight: 400;
 }
 
-h2,
-h3 {
-  font-size: 24px;
+h2, h3 {
+  font-size: 48px;
   margin: 1rem 0;
 }
 

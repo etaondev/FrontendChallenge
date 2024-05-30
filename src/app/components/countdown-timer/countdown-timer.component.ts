@@ -7,7 +7,6 @@ import {
 } from '@angular/core'
 import { BehaviorSubject, interval, Subscription } from 'rxjs'
 import { map } from 'rxjs/operators'
-
 @Component({
   selector: 'app-countdown-timer',
   templateUrl: './countdown-timer.component.html',
