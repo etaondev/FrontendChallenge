@@ -1,5 +1,6 @@
-<div *ngIf="title">
-  <h2 class="responsive-text">
-    Time to {{ title }} <br /><span>{{ countdown }}</span>
-  </h2>
+<div class="countdown-timer-container" *ngIf="title">
+  <h2 class="responsive-text">Time to {{ title }}</h2>
+  <h3 class="responsive-text">
+    {{ countdown }}
+  </h3>
 </div>
