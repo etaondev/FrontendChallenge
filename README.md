@@ -8,6 +8,12 @@ This is an Angular application that allows users to set a countdown timer for a 
 - User can pick a date using a date picker.
 - Displays a countdown timer for the selected date.
 - Stores the title and date in `localStorage` for persistence.
+- Changes size of title and countdown to match the parent width
+
+## Demo
+- Visit https://nc-fe-challenge.surge.sh/
+- Important! It may be a bit buggy - the texts may not adjust correctly at first - just have some patience and play with it for awhile and the functionality should kick in.
+- Due to lack of time and patience I could not address these issues in the end. I'm sure they could be resolved through some discussion.
 
 ## Installation
 
