@@ -1,6 +1,6 @@
 <div class="countdown-timer-container" *ngIf="title">
-  <h2 class="responsive-text" [appFitText]="title" [title]="title" [targetDate]="targetDate">Time to {{ title }}</h2>
-  <h3 class="responsive-text" [appFitText]="targetDate" [title]="title" [targetDate]="targetDate">
-    {{ countdown }}
+  <h2 class="responsive-text" appFitText [title]="title" [targetDate]="targetDate">Time to {{ title  }}</h2>
+  <h3 class="responsive-text" appFitText [title]="title" [targetDate]="targetDate">
+    {{ countdown  }}
   </h3>
 </div>
